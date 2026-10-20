@@ -32,7 +32,6 @@ export class ArticlesDataSource extends DataSource<ArticleSlot> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<ArticleSlot[]> {
-    console.log('connect');
     this.viewSubscription = collectionViewer.viewChange.subscribe((range) =>
       this.onRangeChange(range),
     );

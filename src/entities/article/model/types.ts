@@ -2,11 +2,11 @@ export interface Article {
   id: number;
   title: string;
   url: string;
-  imageUrl: string;
-  newsSite: string;
+  image_url: string;
+  news_site: string;
   summary: string;
-  publishedAt: string;
-  updatedAt: string;
+  published_at: string;
+  updated_at: string;
 }
 
 export interface ArticlesPage {

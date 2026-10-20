@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AccountApi } from '../api/account.api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class AccountStore {
@@ -11,10 +12,12 @@ export class AccountStore {
   public readonly balance = this._balance.asReadonly();
 
   constructor() {
-    this.api.getBalance().subscribe((balance) => this._balance.set(balance));
+    this.api
+      .getBalance()
+      .pipe(takeUntilDestroyed())
+      .subscribe((balance) => this._balance.set(balance));
   }
 
-  /** Balance is updated only after the backend confirms the new value. */
   credit(amount: number): Observable<number> {
     return this.api.credit(amount).pipe(tap((balance) => this._balance.set(balance)));
   }

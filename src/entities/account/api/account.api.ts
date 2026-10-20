@@ -1,10 +1,9 @@
+import { MOCK_APP_CONFIG } from '@/shared';
 import { Injectable } from '@angular/core';
 import { defer, delay, Observable, of, throwError } from 'rxjs';
 
 const STORAGE_KEY = 'mock_balance';
-const MOCK_LATENCY_MS = 300;
 
-/** Mock backend: the server owns the balance and returns its new value after every change. */
 @Injectable({ providedIn: 'root' })
 export class AccountApi {
   getBalance(): Observable<number> {
@@ -20,7 +19,7 @@ export class AccountApi {
       const balance = this.read() + amount;
       this.write(balance);
 
-      return of(balance).pipe(delay(MOCK_LATENCY_MS));
+      return of(balance).pipe(delay(MOCK_APP_CONFIG.MOCK_LATENCY_MS));
     });
   }
 

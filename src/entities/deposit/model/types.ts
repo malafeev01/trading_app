@@ -8,5 +8,4 @@ export interface Deposit {
   depositMethod: DepositMethod;
 }
 
-/** Data the user provides; `id` and `timestamp` are assigned by the backend. */
 export type NewDeposit = Omit<Deposit, 'id' | 'timestamp'>;

@@ -1,5 +1,6 @@
 <app-header-widget>
-  <!-- The header does not know about news: the page decides what goes into the mobile drawer. -->
+  <!-- Here we need to pass drawer through ng-content 
+  since News and Header widgets are on the same FSD level (widgets)  -->
   <ng-template #drawerContent>
     <app-news-widget [fillHeight]="true" />
   </ng-template>
@@ -29,5 +30,4 @@
   </div>
 </main>
 
-<!-- Hosts child routes (the deposit modal page). -->
 <router-outlet />

@@ -34,15 +34,24 @@ export class DepositDialogComponent {
     }),
   });
 
-  /** Called by the modal's OK button; always returns false so the modal is closed only on success. */
-  addDeposit(): false {
+  addDeposit(): boolean {
     if (this.depositForm.invalid) return false;
 
     this.depositForm.disable();
+    this.modalRef.updateConfig({
+      nzOkDisabled: true,
+      nzOkLoading: true,
+    });
 
     this.makeDepositService.makeDeposit(this.depositForm.getRawValue()).subscribe({
       next: () => this.modalRef.close({ success: true }),
-      error: () => this.depositForm.enable(),
+      error: () => {
+        this.depositForm.enable();
+        this.modalRef.updateConfig({
+          nzOkDisabled: false,
+          nzOkLoading: false,
+        });
+      },
     });
 
     return false;

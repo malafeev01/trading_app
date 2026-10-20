@@ -15,7 +15,6 @@ export class DepositStore {
     this.api.getAll().subscribe((deposits) => this._deposits.set(deposits));
   }
 
-  /** State is updated only after the backend confirms the deposit. */
   add(newDeposit: NewDeposit): Observable<Deposit> {
     return this.api
       .create(newDeposit)

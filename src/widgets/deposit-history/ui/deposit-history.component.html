@@ -7,8 +7,8 @@
         <div class="deposit">
           <div nz-row>
             <div nz-col nzSpan="10">{{ deposit.timestamp | date: 'short' }}</div>
-            <div nz-col nzSpan="10">{{ deposit.depositMethod }}</div>
-            <div nz-col nzSpan="2">+{{ deposit.amount }}</div>
+            <div nz-col nzSpan="9">{{ deposit.depositMethod }}</div>
+            <div nz-col nzSpan="3">+{{ deposit.amount }} €</div>
           </div>
           @if (deposit.notes) {
             <div nz-row class="deposit__notes">{{ deposit.notes }}</div>

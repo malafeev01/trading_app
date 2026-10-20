@@ -10,7 +10,6 @@ export interface Article {
 }
 
 export interface ArticlesPage {
-  /** Total number of articles on the server. */
   count: number;
   results: Article[];
 }

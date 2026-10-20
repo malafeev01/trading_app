@@ -32,6 +32,7 @@ export class ArticlesDataSource extends DataSource<ArticleSlot> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<ArticleSlot[]> {
+    console.log('connect');
     this.viewSubscription = collectionViewer.viewChange.subscribe((range) =>
       this.onRangeChange(range),
     );
@@ -62,7 +63,7 @@ export class ArticlesDataSource extends DataSource<ArticleSlot> {
     for (let page = startPage; page <= endPage; page++) {
       this.loadPage(page);
     }
-    this.evictFarPages(startPage, endPage);
+    this.flushPagesCache(startPage, endPage);
   }
 
   private loadPage(page: number): void {
@@ -74,23 +75,24 @@ export class ArticlesDataSource extends DataSource<ArticleSlot> {
       .pipe(takeUntil(this.cancelRequests$))
       .subscribe({
         next: (result) => this.applyPage(page, result.count, result.results),
+
         // Forget the page so the next viewport change can retry it.
         error: () => this.loadedPages.delete(page),
       });
   }
 
   private applyPage(page: number, totalCount: number, articles: Article[]): void {
-    // The page was evicted while the request was in flight.
     if (!this.loadedPages.has(page)) return;
 
     if (this.items.length !== totalCount) {
       this.items.length = totalCount;
     }
     articles.forEach((article, i) => (this.items[page * PAGE_SIZE + i] = article));
+
     this.emit();
   }
 
-  private evictFarPages(startPage: number, endPage: number): void {
+  private flushPagesCache(startPage: number, endPage: number): void {
     if (this.loadedPages.size <= MAX_PAGES_IN_MEMORY) return;
 
     for (const page of this.loadedPages) {
@@ -100,6 +102,7 @@ export class ArticlesDataSource extends DataSource<ArticleSlot> {
       // Keep the array length intact: only the objects are released.
       this.items.fill(undefined, page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
     }
+
     this.emit();
   }
 

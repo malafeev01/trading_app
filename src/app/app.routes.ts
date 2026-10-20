@@ -7,7 +7,7 @@ export const routes: Routes = [
     loadComponent: () => import('@/pages/home').then((m) => m.HomeComponent),
     children: [
       {
-        // Home stays rendered underneath the deposit modal.
+        // To be discussed. This route is not sticky, maybe it would be better to rethink it.
         path: ROUTE_PATHS.deposit,
         loadComponent: () => import('@/pages/deposit').then((m) => m.DepositPageComponent),
       },

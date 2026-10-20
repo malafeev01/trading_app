@@ -12,10 +12,8 @@
     <nz-list-item *cdkVirtualFor="let item of dataSource">
       @if (item) {
         <nz-list-item-meta [nzAvatar]="item.imageUrl" [nzDescription]="item.title">
-          <nz-list-item-meta-title
-            style="display: block; height: 63px; overflow: auto; text-overflow: ellipsis"
-          >
-            <a [href]="item.url" target="_blank" rel="noopener">{{ item.summary }}</a>
+          <nz-list-item-meta-title class="news__row">
+            <a [href]="item.url" target="_blank">{{ item.summary }}</a>
           </nz-list-item-meta-title>
         </nz-list-item-meta>
       } @else {

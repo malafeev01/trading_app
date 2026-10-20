@@ -30,7 +30,6 @@ export class DepositPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe first: destroying the modal must not trigger another navigation.
     this.closeSubscription?.unsubscribe();
     this.modalRef?.destroy();
   }

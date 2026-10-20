@@ -7,7 +7,6 @@ import { map } from 'rxjs';
 export class ResponsiveLayoutService {
   private readonly breakpointService = inject(NzBreakpointService);
 
-  /** `true` below the `md` breakpoint. */
   public readonly isMobile = toSignal(
     this.breakpointService
       .subscribe(gridResponsiveMap, true)

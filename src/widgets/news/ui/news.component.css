@@ -14,6 +14,13 @@
   height: 400px;
 }
 
+.news__row {
+  display: block;
+  height: 63px;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+
 :host(.news--fill) {
   display: flex;
   flex-direction: column;

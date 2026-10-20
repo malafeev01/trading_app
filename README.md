@@ -115,13 +115,13 @@ src/
 │   │   ├── api/
 │   │   └── model/
 │   └── article/                  # news article
-│       ├── api/                  #   HTTP client, DTOs, mappers
+│       ├── api/                  #   HTTP client
 │       └── model/                #   domain types
 │
 └── shared/
     ├── ui/                       # widget-block
     ├── lib/                      # responsive layout service
-    └── config/                   # route paths
+    └── config/                   # route paths, mock app config
 ```
 
 Common segments: `ui` (components), `model` (types, stores, business logic), `api` (backend access),
@@ -206,6 +206,4 @@ notation of FSD is not supported.
 ## Conventions
 
 - Standalone components only; state is held in signals, RxJS is used where streams are natural (HTTP, form submit).
-- Selectors use the `app-` prefix (`app-home`, `app-news-widget`).
-- Component styles live in separate `.css` files; no inline `style` attributes.
 - Stores and APIs never expose writable state.

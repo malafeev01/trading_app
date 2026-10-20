@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { defer, delay, Observable, of, throwError } from 'rxjs';
 import { Deposit, NewDeposit } from '../model/types';
+import { MOCK_APP_CONFIG } from '@/shared';
 
 const STORAGE_KEY = 'mock_deposits';
-const MOCK_LATENCY_MS = 300;
 
-/** Mock backend persisting to localStorage. Swap for HttpClient calls when a real API appears. */
 @Injectable({ providedIn: 'root' })
 export class DepositApi {
   getAll(): Observable<Deposit[]> {
@@ -25,7 +24,7 @@ export class DepositApi {
       };
       this.write([...this.read(), deposit]);
 
-      return of(deposit).pipe(delay(MOCK_LATENCY_MS));
+      return of(deposit).pipe(delay(MOCK_APP_CONFIG.MOCK_LATENCY_MS));
     });
   }
 

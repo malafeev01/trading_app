@@ -28,10 +28,12 @@ import { ArticlesDataSource } from '../model/articles.data-source';
 export class NewsWidgetComponent {
   public readonly fillHeight = input(false);
 
+  private readonly articleApi = inject(ArticleApi);
+
   private readonly viewport = viewChild.required(CdkVirtualScrollViewport);
 
   protected readonly ordering = signal<ArticlesOrdering>(loadOrdering());
-  protected readonly dataSource = new ArticlesDataSource(inject(ArticleApi), this.ordering());
+  protected readonly dataSource = new ArticlesDataSource(this.articleApi, this.ordering());
 
   protected onOrderingChange(ordering: ArticlesOrdering): void {
     this.ordering.set(ordering);

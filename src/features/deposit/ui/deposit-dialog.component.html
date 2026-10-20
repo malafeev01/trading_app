@@ -1,0 +1,41 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="depositForm">
+  <nz-form-item>
+    <nz-form-label nzFor="amount">Amount</nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <input nz-input id="amount" formControlName="amount" type="number" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Deposit Method</nz-form-label>
+    <nz-form-control>
+      <nz-radio-group formControlName="depositMethod">
+        <span nz-radio-button nzValue="card">Card</span>
+        <span nz-radio-button nzValue="paypal">PayPal</span>
+        <span nz-radio-button nzValue="wire">Wire Transfer</span>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="notes">Notes</nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <textarea rows="4" nz-input id="notes" formControlName="notes"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<ng-template #errorTpl let-control>
+  @if (control.errors?.['required']) {
+    This field is required
+  }
+  @if (control.errors?.['min']) {
+    The minimum amount is {{ limits.amount.min }}
+  }
+  @if (control.errors?.['max']) {
+    The maximum amount is {{ limits.amount.max }}
+  }
+  @if (control.errors?.['maxlength']) {
+    The maximum length is {{ limits.notesMaxLength }} characters
+  }
+</ng-template>

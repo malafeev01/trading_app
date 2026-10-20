@@ -1,0 +1,5 @@
+.widget-block {
+  border-radius: 15px;
+  border: 1px solid var(--widget-block-border-color, gray);
+  padding: 24px;
+}

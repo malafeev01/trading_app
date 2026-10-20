@@ -1,0 +1,24 @@
+<nz-header>
+  <div nz-flex nzJustify="space-between" nzAlign="center">
+    <h1 class="header__title">Trading Home</h1>
+
+    @if (isMobile()) {
+      <button nz-button nzType="text" aria-label="Open menu" (click)="isDrawerOpen.set(true)">
+        <nz-icon nzType="menu" nzTheme="outline" />
+      </button>
+    }
+  </div>
+</nz-header>
+
+<nz-drawer
+  [nzClosable]="true"
+  [nzVisible]="isDrawerOpen() && isMobile()"
+  nzPlacement="right"
+  (nzOnClose)="isDrawerOpen.set(false)"
+>
+  <ng-container *nzDrawerContent>
+    @if (isDrawerOpen()) {
+      <ng-container [ngTemplateOutlet]="drawerContent() ?? null" />
+    }
+  </ng-container>
+</nz-drawer>

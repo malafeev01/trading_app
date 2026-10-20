@@ -1,0 +1,22 @@
+<h2 nz-typography>Deposit History</h2>
+
+@if (deposits().length) {
+  <nz-list nzBordered>
+    @for (deposit of deposits(); track deposit.id) {
+      <nz-list-item>
+        <div class="deposit">
+          <div nz-row>
+            <div nz-col nzSpan="10">{{ deposit.timestamp | date: 'short' }}</div>
+            <div nz-col nzSpan="10">{{ deposit.depositMethod }}</div>
+            <div nz-col nzSpan="2">+{{ deposit.amount }}</div>
+          </div>
+          @if (deposit.notes) {
+            <div nz-row class="deposit__notes">{{ deposit.notes }}</div>
+          }
+        </div>
+      </nz-list-item>
+    }
+  </nz-list>
+} @else {
+  <nz-empty nzNotFoundImage="simple" />
+}

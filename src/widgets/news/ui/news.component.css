@@ -1,0 +1,26 @@
+.news__toolbar {
+  margin-bottom: 0.5em;
+}
+
+.news__title {
+  margin-bottom: 0;
+}
+
+.news__sort {
+  width: 150px;
+}
+
+.news__viewport {
+  height: 400px;
+}
+
+:host(.news--fill) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+:host(.news--fill) .news__viewport {
+  flex: 1 1 0;
+  min-height: 0;
+  height: auto;
+}

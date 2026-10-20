@@ -1,0 +1,8 @@
+.deposit {
+  width: 100%;
+}
+
+.deposit__notes {
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
